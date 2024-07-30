@@ -39,7 +39,7 @@ interface BigInt : Comparable<BigInt>, BigIntConstructor {
     /** Determines if this [BigInt] is positive */
     val isPositive get() = signum > 0
     /** Determines if this [BigInt] is either negative or zero (non-positive) */
-    val isNegativeOrZero get() = signum <= 0
+    val isNegativeOrZero2 get() = signum <= 0
     /** Determines if this [BigInt] is either positive or zero (non-negative) */
     val isPositiveOrZero get() = signum >= 0
 
