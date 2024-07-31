@@ -53,10 +53,10 @@ class CommonBigInt private constructor(val data: UInt16ArrayZeroPad, override va
         }
         //if (value == 0) return CommonBigInt(uint16ArrayZeroPadOf(), 0, true)
 
-        override operator fun invoke(value: Int): CommonBigInt = create(value)
-        override operator fun invoke(value: Long): CommonBigInt = create(value) as CommonBigInt
-        override operator fun invoke(value: String): CommonBigInt = create(value) as CommonBigInt
-        override operator fun invoke(value: String, radix: Int): CommonBigInt = create(value, radix) as CommonBigInt
+        override operator fun invoke(value: Int): CommonBigInt = super.invoke(value) as CommonBigInt
+        override operator fun invoke(value: Long): CommonBigInt = super.invoke(value) as CommonBigInt
+        override operator fun invoke(value: String): CommonBigInt = super.invoke(value) as CommonBigInt
+        override operator fun invoke(value: String, radix: Int): CommonBigInt = super.invoke(value, radix) as CommonBigInt
     }
 
 	fun countBits(): Int {
