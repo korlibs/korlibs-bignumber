@@ -1133,3 +1133,7 @@ allprojects {
         offlineMode.set(true)
     }
 }
+
+apiValidation {
+    ignoredProjects.addAll(listOf(rootProject.name))
+}
