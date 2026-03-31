@@ -29,4 +29,26 @@ class BigIntProgressionTest {
             assertFailsWith<NoSuchElementException> { iterator.next() }
         }
     }
+
+    @Test
+    fun testStepAndToStringForDescendingProgression() {
+        val descending = BigIntProgression(10.bi, 0.bi, (-1).bi)
+        val stepped = descending step 2.bi
+
+        assertEquals("10 downTo 0 step 1", descending.toString())
+        assertEquals("10 downTo 0 step 2", stepped.toString())
+        assertEquals(listOf(10.bi, 8.bi, 6.bi, 4.bi, 2.bi, 0.bi), stepped.toList())
+    }
+
+    @Test
+    fun testIteratorStartsEmptyWhenDirectionAndStepMismatch() {
+        val iterator = BigIntProgressionIterator(0.bi, 10.bi, step = (-1).bi)
+        assertFalse(iterator.hasNext())
+        assertFailsWith<NoSuchElementException> { iterator.next() }
+    }
+
+    @Test
+    fun testZeroStepThrows() {
+        assertFailsWith<IllegalArgumentException> { BigIntProgression(0.bi, 10.bi, 0.bi) }
+    }
 }
