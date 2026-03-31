@@ -19,12 +19,12 @@ interface BigInt : Comparable<BigInt>, BigIntConstructor {
     companion object {
         val usesNativeImplementation get() = BigInt(0) !is CommonBigInt
 
-        val ZERO = BigInt("0")
-        val MINUS_ONE = BigInt("-1")
-        val ONE = BigInt("1")
-        val TWO = BigInt("2")
-        val TEN = BigInt("10")
-        val SMALL = BigInt(UINT16_MASK)
+        val ZERO: BigInt by lazy { BigInt("0") }
+        val MINUS_ONE: BigInt by lazy { BigInt("-1") }
+        val ONE: BigInt by lazy { BigInt("1") }
+        val TWO: BigInt by lazy { BigInt("2") }
+        val TEN: BigInt by lazy { BigInt("10") }
+        val SMALL: BigInt by lazy { BigInt(UINT16_MASK) }
     }
 
     // Checks

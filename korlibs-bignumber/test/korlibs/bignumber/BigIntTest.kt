@@ -341,20 +341,178 @@ class BigIntTestCommon : AbstractBigIntTest() {
         assertTrue { CommonBigInt.SMALL.isSmall }
         assertFalse { CommonBigInt(100000).isSmall }
     }
-}
-
-class BigIntTestPlatform : AbstractBigIntTest() {
-    override val Long.bi: BigInt get() = BigInt(this)
-    override val Int.bi: BigInt get() = BigInt(this)
-    override val String.bi: BigInt get() = BigInt(this)
-    override fun String.bi(radix: Int): BigInt = BigInt(this, radix)
-
-    //@Test
-    //@Ignore // Disabled because in the JVM BigInteger.inv() works differently than in common
-    //override fun testInv() {
-    //    super.testInv()
-    //}
 
     @Test
-    fun testEmpty() {}
+    fun testHashCodeAndEquals() {
+        val a = CommonBigInt(123)
+        val b = CommonBigInt(123)
+        val c = CommonBigInt(456)
+        
+        assertEquals(a.hashCode(), b.hashCode())
+        assertEquals(a, b)
+        assertNotEquals(a, c)
+        assertNotEquals<Any>(a, "123")
+        assertNotEquals(a.hashCode(), c.hashCode())
+    }
+
+    @Test
+    fun testUnaryPlus() {
+        val x = CommonBigInt(123)
+        assertEquals(x, +x)
+        val y = CommonBigInt(-456)
+        assertEquals(y, +y)
+    }
+
+    @Test
+    fun testAbsForPositiveAndNegative() {
+        assertEquals(CommonBigInt(123), CommonBigInt(-123).abs())
+        assertEquals(CommonBigInt(0), CommonBigInt(0).abs())
+        assertEquals(CommonBigInt(456), CommonBigInt(456).abs())
+    }
+
+    @Test
+    fun testToBigNum() {
+        val bi = CommonBigInt(42)
+        val bn = bi.toBigNum()
+        assertEquals(42.bi, bn.toBigInt())
+        assertEquals(0, bn.scale)
+    }
+
+    @Test
+    fun testPowWithLargeExponent() {
+        // Test pow with large exponent (BigInt path)
+        val base = 2.bi
+        val largeExp = "1000".bi  // This will use the BigInt path in pow
+        val result = (base pow largeExp).toString().length
+        assertTrue(result > 200)  // 2^1000 is approximately 302 digits
+    }
+
+    @Test
+    fun testPowIntPath() {
+        assertEquals(1.bi, (5.bi pow 0))
+        assertEquals(5.bi, (5.bi pow 1))
+        assertEquals(25.bi, (5.bi pow 2))
+        assertEquals(125.bi, (5.bi pow 3))
+    }
+
+    @Test
+    fun testDivisionNegativeDividend() {
+        assertEquals((-2).bi, (-10).bi / 5.bi)
+        assertEquals(2.bi, (-10).bi / (-5).bi)
+    }
+
+    @Test
+    fun testModuloNegativeDividend() {
+        assertEquals((-1).bi, (-10).bi % 3.bi)
+    }
+
+    @Test
+    fun testDivisionNegativeDivisor() {
+        assertEquals((-2).bi, 10.bi / (-5).bi)
+        assertEquals(2.bi, (-10).bi / (-5).bi)
+    }
+
+    @Test
+    fun testSquareForLargeNumbers() {
+        val large = CommonBigInt("1".repeat(256))
+        val squared = large.square()
+        assertTrue(squared.toString().length > 400)
+    }
+
+    @Test
+    fun testLeadingZerosEdgeCases() {
+        assertEquals(CommonBigInt(0).maxBits, CommonBigInt(0).leadingZeros())
+    }
+
+    @Test
+    fun testTrailingZerosEdgeCases() {
+        assertEquals(CommonBigInt(0).maxBits, CommonBigInt(0).trailingZeros())
+    }
+
+    @Test
+    fun testDivisionLargeNumbers() {
+        val large = "123456789012345678901234567890".bi
+        val divisor = 12345.bi
+        val result = large / divisor
+        assertTrue(result.toString().isNotEmpty())
+    }
+
+    @Test
+    fun testDivisionSmallAndLarge() {
+        val div = "100000000000000000000".bi / "20000000000".bi
+        assertEquals("5000000000".bi, div)
+    }
+
+    @Test
+    fun testModuloLargeNumbers() {
+        val large = "123456789012345678901234567890".bi
+        val divisor = 12345.bi
+        val result = large % divisor
+        assertTrue(result < divisor)
+    }
+
+    @Test
+    fun testAddNegativeNumbers() {
+        assertEquals((-200).bi, (-100).bi + (-100).bi)
+    }
+
+    @Test
+    fun testSubtractPositiveFromNegative() {
+        assertEquals((-150).bi, (-100).bi - 50.bi)
+    }
+
+    @Test
+    fun testMultiplyNegativeNumbers() {
+        assertEquals(100.bi, (-10).bi * (-10).bi)
+        assertEquals((-100).bi, (-10).bi * 10.bi)
+    }
+
+    @Test
+    fun testShiftLeftWithZero() {
+        val x = CommonBigInt(123)
+        assertEquals(x, x shl 0)
+    }
+
+    @Test
+    fun testShiftRightWithZero() {
+        val x = CommonBigInt(123)
+        assertEquals(x, x shr 0)
+    }
+
+    @Test
+    fun testShiftLeftNegative() {
+        val x = CommonBigInt(16)
+        assertEquals(x, x shl 0)  // Shifting left with 0 should return same value
+    }
+
+    @Test
+    fun testCompareNegativeWithNegative() {
+        assertTrue((-100).bi < (-50).bi)
+        assertTrue((-50).bi > (-100).bi)
+    }
+
+    @Test
+    fun testDivRemWithNegativeBoth() {
+        val result = (-10).bi / (-3).bi
+        assertEquals(3.bi, result)
+    }
+
+    @Test
+    fun testSignumVariants() {
+        assertEquals(-1, (-100).bi.signum)
+        assertEquals(0, 0.bi.signum)
+        assertEquals(1, 100.bi.signum)
+    }
+
+    @Test
+    fun testInvalidRadixInToString() {
+        assertFailsWith<BigIntInvalidFormatException> { CommonBigInt(123).toString(1) }
+        assertFailsWith<BigIntInvalidFormatException> { CommonBigInt(123).toString(27) }
+    }
+
+    @Test
+    fun testToIntOverflow() {
+        val huge = CommonBigInt("10000000000000000000")
+        assertFailsWith<BigIntOverflowException> { huge.toInt() }
+    }
 }

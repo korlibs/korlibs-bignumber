@@ -186,4 +186,66 @@ class BigNumTest {
         assertEquals(BigNum("123.123").hashCode(), BigNum("123.123").hashCode())
     }
 
+    @Test
+    fun testNegativeBigNum() {
+        val neg = "-1.5".bn
+        assertEquals(-1.bi, neg.toBigInt())
+        assertTrue(neg.int.isNegative)
+    }
+
+    @Test
+    fun testBigNumPow() {
+        val bn = "2".bn pow 3
+        assertEquals("8".bn, bn)
+    }
+
+    @Test
+    fun testBigNumPowLarge() {
+        val bn = "2".bn pow 10
+        assertEquals("1024".bn, bn)
+    }
+
+    @Test
+    fun testBigNumCompareTo() {
+        assertTrue("1.5".bn > "1.4".bn)
+        assertTrue("1.5".bn < "1.6".bn)
+        assertTrue("1.5".bn >= "1.5".bn)
+        assertTrue("1.5".bn <= "1.5".bn)
+    }
+
+    @Test
+    fun testBigNumRangeTo() {
+        val range = "0.5".bn .. "1.5".bn
+        assertTrue("1.0".bn in range)
+        assertFalse("2.0".bn in range)
+    }
+
+    @Test
+    fun testBigNumSubtractionLeadingNegative() {
+        val result = "1.0".bn - "2.0".bn
+        assertEquals("-1.0", result.toString())
+    }
+
+    @Test
+    fun testBigNumDivisionZeroScale() {
+        val result = "10".bn / "2".bn
+        assertEquals("5".bn, result)
+    }
+
+    @Test
+    fun testBigNumDivWithPrecision() {
+        val a = "1".bn
+        val b = "3".bn
+        val result = a.div(b, 5)
+        assertTrue(result.toString().contains("."))
+    }
+
+    @Test
+    fun testBigNumIntOperations() {
+        assertEquals("11".bn, "10".bn + "1".bn)
+        assertEquals("9".bn, "10".bn - "1".bn)
+        assertEquals("20".bn, "10".bn * "2".bn)
+        assertEquals("5".bn, "10".bn / "2".bn)
+    }
+
 }
