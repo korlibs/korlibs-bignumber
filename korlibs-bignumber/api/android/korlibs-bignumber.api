@@ -1,37 +1,37 @@
 public abstract interface class korlibs/bignumber/BigInt : java/lang/Comparable, korlibs/bignumber/BigIntConstructor {
 	public static final field Companion Lkorlibs/bignumber/BigInt$Companion;
-	public abstract fun abs ()Lkorlibs/bignumber/BigInt;
+	public fun abs ()Lkorlibs/bignumber/BigInt;
 	public abstract fun and (Lkorlibs/bignumber/BigInt;)Lkorlibs/bignumber/BigInt;
-	public abstract fun div (I)Lkorlibs/bignumber/BigInt;
+	public fun div (I)Lkorlibs/bignumber/BigInt;
 	public abstract fun div (Lkorlibs/bignumber/BigInt;)Lkorlibs/bignumber/BigInt;
 	public abstract fun getSignum ()I
 	public abstract fun inv ()Lkorlibs/bignumber/BigInt;
-	public abstract fun isNegative ()Z
-	public abstract fun isNegativeOrZero ()Z
-	public abstract fun isNotZero ()Z
-	public abstract fun isPositive ()Z
-	public abstract fun isPositiveOrZero ()Z
-	public abstract fun isZero ()Z
-	public abstract fun minus (I)Lkorlibs/bignumber/BigInt;
+	public fun isNegative ()Z
+	public fun isNegativeOrZero ()Z
+	public fun isNotZero ()Z
+	public fun isPositive ()Z
+	public fun isPositiveOrZero ()Z
+	public fun isZero ()Z
+	public fun minus (I)Lkorlibs/bignumber/BigInt;
 	public abstract fun minus (Lkorlibs/bignumber/BigInt;)Lkorlibs/bignumber/BigInt;
 	public abstract fun or (Lkorlibs/bignumber/BigInt;)Lkorlibs/bignumber/BigInt;
-	public abstract fun plus (I)Lkorlibs/bignumber/BigInt;
+	public fun plus (I)Lkorlibs/bignumber/BigInt;
 	public abstract fun plus (Lkorlibs/bignumber/BigInt;)Lkorlibs/bignumber/BigInt;
 	public abstract fun pow (I)Lkorlibs/bignumber/BigInt;
 	public abstract fun pow (Lkorlibs/bignumber/BigInt;)Lkorlibs/bignumber/BigInt;
-	public abstract fun rangeTo (Lkorlibs/bignumber/BigInt;)Lkorlibs/bignumber/ranges/BigIntRange;
-	public abstract fun rem (I)Lkorlibs/bignumber/BigInt;
+	public fun rangeTo (Lkorlibs/bignumber/BigInt;)Lkorlibs/bignumber/ranges/BigIntRange;
+	public fun rem (I)Lkorlibs/bignumber/BigInt;
 	public abstract fun rem (Lkorlibs/bignumber/BigInt;)Lkorlibs/bignumber/BigInt;
 	public abstract fun shl (I)Lkorlibs/bignumber/BigInt;
 	public abstract fun shr (I)Lkorlibs/bignumber/BigInt;
-	public abstract fun square ()Lkorlibs/bignumber/BigInt;
-	public abstract fun times (I)Lkorlibs/bignumber/BigInt;
-	public abstract fun times (J)Lkorlibs/bignumber/BigInt;
+	public fun square ()Lkorlibs/bignumber/BigInt;
+	public fun times (I)Lkorlibs/bignumber/BigInt;
+	public fun times (J)Lkorlibs/bignumber/BigInt;
 	public abstract fun times (Lkorlibs/bignumber/BigInt;)Lkorlibs/bignumber/BigInt;
 	public abstract fun toInt ()I
 	public abstract fun toString (I)Ljava/lang/String;
 	public abstract fun unaryMinus ()Lkorlibs/bignumber/BigInt;
-	public abstract fun unaryPlus ()Lkorlibs/bignumber/BigInt;
+	public fun unaryPlus ()Lkorlibs/bignumber/BigInt;
 	public abstract fun xor (Lkorlibs/bignumber/BigInt;)Lkorlibs/bignumber/BigInt;
 }
 
@@ -68,10 +68,10 @@ public final class korlibs/bignumber/BigInt$DefaultImpls {
 }
 
 public abstract interface class korlibs/bignumber/BigIntCompanion : korlibs/bignumber/BigIntConstructor {
-	public abstract fun invoke (I)Lkorlibs/bignumber/BigInt;
-	public abstract fun invoke (J)Lkorlibs/bignumber/BigInt;
-	public abstract fun invoke (Ljava/lang/String;)Lkorlibs/bignumber/BigInt;
-	public abstract fun invoke (Ljava/lang/String;I)Lkorlibs/bignumber/BigInt;
+	public fun invoke (I)Lkorlibs/bignumber/BigInt;
+	public fun invoke (J)Lkorlibs/bignumber/BigInt;
+	public fun invoke (Ljava/lang/String;)Lkorlibs/bignumber/BigInt;
+	public fun invoke (Ljava/lang/String;I)Lkorlibs/bignumber/BigInt;
 }
 
 public final class korlibs/bignumber/BigIntCompanion$DefaultImpls {
@@ -86,9 +86,9 @@ public final class korlibs/bignumber/BigIntCompanion$DefaultImpls {
 
 public abstract interface class korlibs/bignumber/BigIntConstructor {
 	public abstract fun create (I)Lkorlibs/bignumber/BigInt;
-	public abstract fun create (J)Lkorlibs/bignumber/BigInt;
-	public abstract fun create (Ljava/lang/String;)Lkorlibs/bignumber/BigInt;
-	public abstract fun create (Ljava/lang/String;I)Lkorlibs/bignumber/BigInt;
+	public fun create (J)Lkorlibs/bignumber/BigInt;
+	public fun create (Ljava/lang/String;)Lkorlibs/bignumber/BigInt;
+	public fun create (Ljava/lang/String;I)Lkorlibs/bignumber/BigInt;
 }
 
 public final class korlibs/bignumber/BigIntConstructor$DefaultImpls {
